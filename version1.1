@@ -1,4 +1,5 @@
 
+
 #Proyecto Programado Brayner Moncada
 #Nombre del juego: Operation moon light
 
@@ -7,18 +8,21 @@
 import tkinter
 import pygame
 #####################Funcion de los botones#####################################
-def start_game():#ir a ventana del nivel 1
-    menu.forget()
-    v_nivel_1.pack(fill='both', expand=1)
-    
 
-def abandonar():#ir a v_bienvenida
-    v_nivel_1.forget()
-    v_salon.forget()
-    v_niveles.forget()
-    v_programador.forget()
-    menu.pack(fill='both' , expand=1)
-    
+
+
+def start_game():#ir a ventana del nivel 1
+    v_sala.forget()
+    v_jugar.pack(fill='both', expand=1)
+
+def sala_game():#Ir a la sala de juego
+    menu.forget()
+    v_sala.pack(fill='both', expand=1)
+
+def empezar_juego():#Jugar partida
+    v_jugar.forget()
+    v_empezar_juego.pack(fill='both',expand=1)
+
 
 def salon_fama():#Me lleva al salon de la fama
     menu.forget()
@@ -31,29 +35,79 @@ def ir_niveles():# Niveles disponibles en ventana (Niveles)
 def ir_info():# informacion del programador
     menu.forget()
     v_programador.pack(fill='both', expand=1)
+    
+######### FUNCION DE BOTON PARA IR A CADA NIVEL####################################
+    
+def primer_nivel():#jugar primer nivel
+    menu_levels.forget()
+    firts_level.pack(fill='both', expand=1)
+
+def segundo_nivel():# jugar segundo nivel
+    menu_levels.forget()
+    second_level.pack(fill='both', expand=1)
+
+def tercer_nivel():# jugar tercer nivel
+    menu_levels.forget()
+    third_level.pack(fill='both', expand=1)
+    
+###################FUNCION PARA RETROCEDER EN CADA VENTANA#################################
+
+
+def abandonar():#ir a v_bienvenida
+    v_sala.forget()
+    v_salon.forget()
+    v_niveles.forget()
+    v_programador.forget()
+    v_jugar.forget()
+    v_empezar_juego.forget()
+    menu.pack(fill='both' , expand=1)
+    
+def salir():# ir a niveles disponibles
+    firts_level.forget()
+    second_level.forget()
+    third_level.forget()
+    menu_levels.pack(fill = 'both' , expand = 1)
+
+    
 
 #####################Ventana de bienvenida y principal #########################################
+
 
 v_bienvenida = tkinter.Tk() # Ventana de bienveida
 v_bienvenida.geometry("800x600")#Tamaño de la ventana de bienvenida
 v_bienvenida.title("OPERATION MOON LIGHT")# Nombre de la primera ventana
 
-####################Ventanas Hijas(NIVELES DEL JUEGO###############################################
+####################Ventanas Hijas###############################################
+
 menu=tkinter.Frame(v_bienvenida)# cambio ventanas 
-v_nivel_1 = tkinter.Frame(v_bienvenida)# Primer nivel
-v_salon = tkinter.Frame(v_bienvenida)#Salon de la fama
-v_niveles = tkinter.Frame(v_bienvenida)# Niveles disponibles
+v_sala = tkinter.Frame(v_bienvenida)# Primer nivel
+v_salon = tkinter.Frame(v_bienvenida)#Salon de la Fama
+v_niveles = tkinter.Frame(v_bienvenida)#Niveles disponibles
 v_programador=tkinter.Frame(v_bienvenida)#informacion del progrmador
+v_jugar = tkinter.Frame(v_bienvenida)# IR AL JUEGO
+v_empezar_juego = tkinter.Frame(v_jugar) # PARA EMPEZAR A JUGAR
+
+############VENTANAS DE CADA NIVEL###############################
 
 
-#############################LABELS#################################################
-label_bienvenida=tkinter.Label(v_bienvenida,text="BIENVENIDO A OPERATION MOON LIGHT",font=("Cambria",20))
-label_bienvenida.pack(pady=20)# Solo es a bienvenida al juego
+menu_levels = tkinter.Frame(v_niveles)#Cambiar de ventanas de niveles
+firts_level = tkinter.Frame(v_niveles)# Ir al primer nivel
+second_level = tkinter.Frame(v_niveles)# Ir al segundo nivel
+third_level = tkinter.Frame(v_niveles)#Ir al tercer nivel
 
-label_indicacion=tkinter.Label(v_bienvenida, text ="PULSA EL BOTON **START** PARA INCIAR EL JUEGO",font=("Cambria",20))
-label_indicacion.place(x= 150,y= 400)#INDICACIONES
 
-label_carrera=tkinter.Label(v_programador, text ="Carrera:Ingenieria en computadores",font=("Cambria",20))
+
+#############################LABELS#################################################################
+
+
+
+label_bienvenida=tkinter.Label(menu,text="BIENVENIDO A OPERATION MOON LIGHT",font=("Cambria",20))
+label_bienvenida.pack(pady=20)# Solo es la bienvenida al juego
+
+label_indicacion=tkinter.Label(menu, text ="PULSA EL BOTON OPEN PARA ABRIR LA OPCION DE JUGAR",font=("Cambria",20))
+label_indicacion.pack(pady=150)#place(x= 150,y= 400)#INDICACIONES
+
+label_carrera=tkinter.Label(v_programador, text ="Carrera: Ingenieria en computadores",font=("Cambria",20))
 label_carrera.place(x= 10,y= 100)#carrera del programador
 
 label_pais=tkinter.Label(v_programador, text ="Pais de producción: Costa Rica",font=("Cambria",20))
@@ -71,7 +125,7 @@ label_año.place(x=10,y= 180)#Año que cursa el programador
 label_grupo=tkinter.Label(v_programador, text ="grupo: 1",font=("Cambria",20))
 label_grupo.place(x=10,y= 220)#Grupo del programador
 
-label_profe=tkinter.Label(v_programador, text ="Profesor: Jeff ",font=("Cambria",20))
+label_profe=tkinter.Label(v_programador, text ="Profesor: Jeff Schmidt Peralta",font=("Cambria",20))
 label_profe.place(x=10,y= 260)#nombre profesor
 
 label_version=tkinter.Label(v_programador, text ="Version de Juego: 1.0 ",font=("Cambria",20))
@@ -80,53 +134,88 @@ label_version.place(x=10,y= 300)#version del programa
 label_autor=tkinter.Label(v_programador, text ="Autor: Brayner Moncada",font=("Cambria",20))
 label_autor.place(x=10,y= 340)#Nombre del autor del programa
 
-#label_modulos=tkinter.Label(v_programador, text ="Version de Juego: 1.0 ",font=("Cambria",20))
-#label_modulos.place(x=0,y= 100)#version del programa
+label_modulos=tkinter.Label(v_programador, text ="Version de Juego: 1.0 ",font=("Cambria",20))
+label_modulos.place(x=10,y= 380)#version del programa
 
-#label_instrucciones=tkinter.Label(v_programador, text ="Autor: Brayner Moncada",font=("Cambria",20))
-#label_instrucciones.place(x=0,y= 100)#Nombre del autor del programa
+label_instrucciones=tkinter.Label(v_programador, text ="Autor: Brayner Moncada",font=("Cambria",20))
+label_instrucciones.place(x=10,y= 420)#Nombre del autor del programa
+
+label_nombre = tkinter.Label(v_sala,text = "Nombre del jugador: " , font = ("Cambria", 20))
+label_nombre.place(x=10,y=30)
+
+label_nombre = tkinter.Label(v_sala,text = "PRESIONE JUGAR PARA INCIAR PARTIDA " , font = ("Cambria", 20))
+label_nombre.pack(pady=150)
+
+cuadro = tkinter.Entry(v_sala,width=15,justify="right", font = "Cambria 20")
+cuadro.place(x=270,y=30)
 
 
 ##############################Botones###########################################
-button_iniciar = tkinter.Button(v_bienvenida,text= "**START**",command = start_game,bg = "yellow")
-button_iniciar.place(x=400,y=500)#boton para inciar una nueva partida
 
-button_abandonar = tkinter.Button(v_nivel_1 , text = "ABANDONAR PARTIDA",command = abandonar,bg="Red")
-button_abandonar.place(x=350,y=450)#VOlver de la partida
 
-button_salon = tkinter.Button(v_bienvenida,text= "Mejores Puntajes",command = salon_fama,bg = "Turquoise")
+button_iniciar = tkinter.Button(menu,text= "OPEN",command = sala_game,bg = "yellow")
+button_iniciar.pack()#boton para inciar una nueva partida
+
+button_abandonar = tkinter.Button(v_sala , text = "VOLVER",command = abandonar,bg="Red")
+button_abandonar.place(x=350,y=500)#VOlver de la partida
+
+button_salon = tkinter.Button(menu,text= "Mejores Puntajes",command = salon_fama,bg = "Turquoise")
 button_salon.place(x=100,y=120)
 
 button_volver= tkinter.Button(v_salon , text = "volver",command = abandonar,bg="Red")
-button_volver.place(x=400,y=250)#Volver de salon de la fama
+button_volver.place(x=400,y=500)#Volver de salon de la fama
 
-button_niveles= tkinter.Button(v_bienvenida, text = "NIVELES DISPONIBLES",command = ir_niveles,bg="Turquoise")
+button_niveles= tkinter.Button(menu, text = "NIVELES DISPONIBLES",command = ir_niveles,bg="Turquoise")
 button_niveles.place(x=300,y=120)#Niveles del juego
 
-button_regresar= tkinter.Button(v_niveles , text = "volver",command = abandonar,bg="Red")
-button_regresar.place(x=400,y=250)#Volver de niveles disponibles
+button_regresar= tkinter.Button(menu_levels , text = "volver",command = abandonar,bg="Red")
+button_regresar.place(x=400,y=500)#Volver de niveles disponibles
 
 
-button_progra= tkinter.Button(v_bienvenida, text = "Creador del Programa",command = ir_info,bg="Turquoise")
+button_progra= tkinter.Button(menu, text = "Creador del Programa",command = ir_info,bg="Turquoise")
 button_progra.place(x=500,y=120)#informacion del programador
 
 button_r= tkinter.Button(v_programador , text = "volver",command = abandonar,bg="Red")
-button_r.place(x=350,y=250)#Volver de informacion del programador
+button_r.place(x=350,y=500)#Volver de informacion del programador
 
 
-button_primero= tkinter.Button(v_niveles, text = "Primer Nivel",bg="Turquoise")
-button_primero.place(x=200,y=120)#ir al nivel 1
+button_primero= tkinter.Button(menu_levels, text = "Primer Nivel",command = primer_nivel,bg="Turquoise")
+button_primero.pack(pady=10)#ir al nivel 1
 
-button_segundo= tkinter.Button(v_niveles , text = "Segundo Nivel",bg="Turquoise")
-button_segundo.place(x=300,y=120)#ir al nivel 2
+button_segundo= tkinter.Button(menu_levels , text = "Segundo Nivel",command= segundo_nivel,bg="Turquoise")
+button_segundo.pack(pady=40)#ir al nivel 2
 
 
-button_tercero= tkinter.Button(v_niveles, text = "Tercer Nivel",bg="Turquoise")
-button_tercero.place(x=400,y=120)#ir al nivel 3
+button_tercero= tkinter.Button(menu_levels, text = "Tercer Nivel",command=tercer_nivel,bg="Turquoise")
+button_tercero.pack(pady=41)#ir al nivel 3
 
+button_lvl1= tkinter.Button(firts_level , text = "volver",command = salir,bg="Red")
+button_lvl1.place(x=400,y=500)#Volver a niveles disponibles
+
+button_lvl2= tkinter.Button(second_level , text = "volver",command = salir,bg="Red")
+button_lvl2.place(x=400,y=500)#Volver a niveles disponibles
+
+button_lvl3= tkinter.Button(third_level , text = "volver",command = salir,bg="Red")
+button_lvl3.place(x=400,y=500)#Volver a niveles disponibles
+
+
+button_exit = tkinter.Button(v_sala, text = "VOLVER",command = abandonar,bg="Red")
+button_exit.place(x=350,y=500)#VOlver al menu principal
+
+button_jugar= tkinter.Button(v_sala, text = "JUGAR",command = start_game,bg="Yellow")
+button_jugar.place(x=350,y=300)#Iniciar Juego
+
+button_abandonar= tkinter.Button(v_jugar , text = "ABANDONAR PARTIDA",command = abandonar ,bg="Red")
+button_abandonar.place(x=350,y=500)#Abandonar la partida
 
 
 
 menu.pack()
+menu_levels.pack()
+v_jugar.pack()
+v_sala.pack
 
 
+
+
+v_bienvenida.mainloop()
